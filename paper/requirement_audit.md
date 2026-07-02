@@ -60,6 +60,5 @@ lines 715-1033. Due date: 2026-07-05 23:59:59 Asia/Shanghai.
 - Evidence: `paper/main.pdf`, scripts, configs, result CSVs, and figure-generation scripts are present.
 
 - Requirement: note group member names and student IDs in the report.
-- Status: partially satisfied.
-- Evidence: names are now in `paper/main.tex`: Haowen Xu, Yuchen Jiang, and Jiajun Wang.
-- Remaining gap: student IDs are not available in the project context and still need to be added before submission.
+- Status: satisfied.
+- Evidence: `paper/main.tex` lists Haowen Xu 524031910714, Yuchen Jiang 524031910685, and Jiajun Wang 524531910009.
