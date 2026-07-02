@@ -1,0 +1,51 @@
+experiment:
+  name: logmel_bilstm_ctc
+  seed: 1337
+  description: "Clean-trained log-mel BiLSTM-CTC baseline evaluated under clean/noisy test conditions."
+
+data:
+  train_manifest: data/manifests/train.csv
+  dev_manifest: data/manifests/dev.csv
+  test_manifest: data/manifests/test.csv
+  sample_rate: 16000
+  max_seconds: 15.0
+  noise_conditions:
+    - clean
+    - snr_20
+    - snr_10
+    - snr_5
+
+features:
+  type: logmel
+  n_mels: 80
+  frame_ms: 25
+  hop_ms: 10
+  cache_dir: data/features/logmel
+
+model:
+  type: bilstm_ctc
+  input_dim: 80
+  hidden_dim: 256
+  num_layers: 2
+  dropout: 0.1
+
+training:
+  batch_size: 16
+  max_epochs: 30
+  learning_rate: 0.001
+  gradient_clip_norm: 5.0
+  early_stop_patience: 5
+
+decoding:
+  type: greedy_ctc
+
+metrics:
+  primary:
+    - wer
+    - cer
+  secondary:
+    - substitutions
+    - deletions
+    - insertions
+    - relative_wer_increase
+

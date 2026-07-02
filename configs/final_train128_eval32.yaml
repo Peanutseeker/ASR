@@ -1,0 +1,86 @@
+experiment:
+  name: final_train128_eval32_noise_robust_asr
+  seed: 1337
+  description: "Final non-paper experiment set for clean-trained low-resource ASR under additive noise."
+
+data:
+  train_manifest: data/manifests/train-clean-5-train128.csv
+  eval_condition_manifest: runs/baseline_train128_eval32/data/manifests/noisy_eval.csv
+  train_examples: 128
+  eval_clean_examples: 32
+  eval_rows_total: 128
+  sample_rate: 16000
+  noise_conditions:
+    - clean
+    - snr_20
+    - snr_10
+    - snr_5
+
+systems:
+  logmel_ctc:
+    role: from_scratch_baseline
+    feature: logmel
+    model: TinyBiLSTM-CTC
+    checkpoint: runs/baseline_train128_norm_eval32_e10/checkpoints/logmel_ctc_train128_norm_e10.pt
+    metrics: runs/baseline_train128_norm_eval32_e10/results/logmel_ctc_train128_norm_e10_metrics.csv
+    n_mels: 80
+    hidden_dim: 256
+    max_epochs: 10
+    batch_size: 4
+    learning_rate: 0.001
+
+  wav2vec2_base_cached_head:
+    role: pure_ssl_ablation
+    feature: cached frozen hidden states
+    feature_model: facebook/wav2vec2-base
+    feature_layer: -1
+    model: TinyBiLSTM-CTC
+    checkpoint: runs/frozen_wav2vec2_base_train128_eval32/checkpoints/ssl_ctc_train128_e80.pt
+    train_feature_manifest: runs/frozen_wav2vec2_base_train128_eval32/data/manifests/train_features.csv
+    eval_feature_manifest: runs/frozen_wav2vec2_base_train128_eval32/data/manifests/eval_features.csv
+    metrics: runs/frozen_wav2vec2_base_train128_eval32/results/ssl_ctc_train128_e80_metrics.csv
+    hidden_dim: 128
+    max_epochs: 80
+    batch_size: 4
+    learning_rate: 0.001
+    environment:
+      HF_HUB_DISABLE_XET: "1"
+
+  wav2vec2_base960h_cached_head:
+    role: frozen_asr_finetuned_encoder_baseline
+    feature: cached frozen hidden states
+    feature_model: facebook/wav2vec2-base-960h
+    feature_layer: -1
+    model: TinyBiLSTM-CTC
+    checkpoint: runs/frozen_wav2vec2_base960h_train128_eval32/checkpoints/ssl_ctc_train128_e30.pt
+    train_feature_manifest: runs/frozen_wav2vec2_base960h_train128_eval32/data/manifests/train_features.csv
+    eval_feature_manifest: runs/frozen_wav2vec2_base960h_train128_eval32/data/manifests/eval_features.csv
+    metrics: runs/frozen_wav2vec2_base960h_train128_eval32/results/ssl_ctc_train128_e30_metrics.csv
+    hidden_dim: 128
+    max_epochs: 30
+    batch_size: 4
+    learning_rate: 0.001
+
+  wav2vec2_base960h_pretrained_ctc:
+    role: pretrained_reference
+    model: facebook/wav2vec2-base-960h
+    metrics: runs/pretrained_wav2vec2_base960h_eval32/results/full_metrics.csv
+
+outputs:
+  long_metrics: results/tables/metrics_long.csv
+  summary_table: results/tables/metrics_summary.csv
+  figures:
+    - results/figures/wer_vs_snr.png
+    - results/figures/cer_vs_snr.png
+    - results/figures/relative_wer_increase.png
+    - results/figures/edit_breakdown_5db.png
+
+metrics:
+  primary:
+    - wer
+    - cer
+  secondary:
+    - substitutions
+    - deletions
+    - insertions
+    - relative_wer_increase_5db

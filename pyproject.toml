@@ -1,0 +1,29 @@
+[project]
+name = "asr-noise-robust"
+version = "0.1.0"
+description = "Noise-robust low-resource ASR experiments with frozen self-supervised speech representations."
+requires-python = ">=3.9"
+dependencies = [
+  "torch",
+  "torchaudio",
+  "torchcodec",
+  "transformers",
+  "datasets",
+  "jiwer",
+  "numpy",
+  "pandas",
+  "matplotlib",
+  "seaborn",
+  "tqdm",
+  "pyyaml",
+]
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.ruff]
+line-length = 100

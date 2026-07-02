@@ -1,0 +1,17 @@
+system_id,system_label,system_group,condition,condition_label,condition_order,wer,cer,substitutions,deletions,insertions,source_path
+logmel_train128,Log-mel CTC,from_scratch,clean,clean,0,1.0,0.954852,29,422,0,runs/baseline_train128_norm_eval32_e10/results/logmel_ctc_train128_norm_e10_metrics.csv
+logmel_train128,Log-mel CTC,from_scratch,snr_20,20 dB,1,1.0,0.946835,31,420,0,runs/baseline_train128_norm_eval32_e10/results/logmel_ctc_train128_norm_e10_metrics.csv
+logmel_train128,Log-mel CTC,from_scratch,snr_10,10 dB,2,1.0,0.948523,32,419,0,runs/baseline_train128_norm_eval32_e10/results/logmel_ctc_train128_norm_e10_metrics.csv
+logmel_train128,Log-mel CTC,from_scratch,snr_5,5 dB,3,1.0,0.949789,37,414,0,runs/baseline_train128_norm_eval32_e10/results/logmel_ctc_train128_norm_e10_metrics.csv
+wav2vec2_base960h_ctc,Wav2Vec2 960h pretrained CTC,reference,clean,clean,0,0.050998,0.017722,19,3,1,runs/pretrained_wav2vec2_base960h_eval32/results/full_metrics.csv
+wav2vec2_base960h_ctc,Wav2Vec2 960h pretrained CTC,reference,snr_20,20 dB,1,0.08204,0.03038,33,1,3,runs/pretrained_wav2vec2_base960h_eval32/results/full_metrics.csv
+wav2vec2_base960h_ctc,Wav2Vec2 960h pretrained CTC,reference,snr_10,10 dB,2,0.350333,0.179325,126,21,11,runs/pretrained_wav2vec2_base960h_eval32/results/full_metrics.csv
+wav2vec2_base960h_ctc,Wav2Vec2 960h pretrained CTC,reference,snr_5,5 dB,3,0.824834,0.527004,276,83,13,runs/pretrained_wav2vec2_base960h_eval32/results/full_metrics.csv
+wav2vec2_base960h_hidden_head,Wav2Vec2 960h hidden + CTC head,asr_finetuned_encoder,clean,clean,0,0.055432,0.018143,21,3,1,runs/frozen_wav2vec2_base960h_train128_eval32/results/ssl_ctc_train128_e30_metrics.csv
+wav2vec2_base960h_hidden_head,Wav2Vec2 960h hidden + CTC head,asr_finetuned_encoder,snr_20,20 dB,1,0.073171,0.029958,29,2,2,runs/frozen_wav2vec2_base960h_train128_eval32/results/ssl_ctc_train128_e30_metrics.csv
+wav2vec2_base960h_hidden_head,Wav2Vec2 960h hidden + CTC head,asr_finetuned_encoder,snr_10,10 dB,2,0.441242,0.202532,164,20,15,runs/frozen_wav2vec2_base960h_train128_eval32/results/ssl_ctc_train128_e30_metrics.csv
+wav2vec2_base960h_hidden_head,Wav2Vec2 960h hidden + CTC head,asr_finetuned_encoder,snr_5,5 dB,3,0.86918,0.582278,289,91,12,runs/frozen_wav2vec2_base960h_train128_eval32/results/ssl_ctc_train128_e30_metrics.csv
+wav2vec2_base_ssl_head,Wav2Vec2 base + CTC head,pure_ssl,clean,clean,0,1.0,0.496203,365,56,30,runs/frozen_wav2vec2_base_train128_eval32/results/ssl_ctc_train128_e80_metrics.csv
+wav2vec2_base_ssl_head,Wav2Vec2 base + CTC head,pure_ssl,snr_20,20 dB,1,1.141907,0.649789,419,9,87,runs/frozen_wav2vec2_base_train128_eval32/results/ssl_ctc_train128_e80_metrics.csv
+wav2vec2_base_ssl_head,Wav2Vec2 base + CTC head,pure_ssl,snr_10,10 dB,2,1.186253,0.77173,431,18,86,runs/frozen_wav2vec2_base_train128_eval32/results/ssl_ctc_train128_e80_metrics.csv
+wav2vec2_base_ssl_head,Wav2Vec2 base + CTC head,pure_ssl,snr_5,5 dB,3,1.084257,0.736709,378,72,39,runs/frozen_wav2vec2_base_train128_eval32/results/ssl_ctc_train128_e80_metrics.csv

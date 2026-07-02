@@ -1,0 +1,12 @@
+torch
+torchaudio
+torchcodec
+transformers
+datasets
+jiwer
+numpy
+pandas
+matplotlib
+seaborn
+tqdm
+pyyaml

@@ -1,0 +1,55 @@
+experiment:
+  name: hubert_frozen_bilstm_ctc_noise_robust
+  seed: 1337
+  description: "Frozen HuBERT features with lightweight CTC heads for low-resource noise-robust ASR."
+
+data:
+  train_manifest: data/manifests/train.csv
+  dev_manifest: data/manifests/dev.csv
+  test_manifest: data/manifests/test.csv
+  sample_rate: 16000
+  max_seconds: 15.0
+  noise_conditions:
+    - clean
+    - snr_20
+    - snr_10
+    - snr_5
+
+features:
+  type: ssl
+  model_name: facebook/hubert-base-ls960
+  layers:
+    - 6
+    - 9
+    - 12
+  primary_layer: 9
+  freeze_backbone: true
+  cache_dir: data/features/hubert
+
+model:
+  type: bilstm_ctc
+  input_dim: 768
+  hidden_dim: 256
+  num_layers: 1
+  dropout: 0.1
+
+training:
+  batch_size: 8
+  max_epochs: 30
+  learning_rate: 0.001
+  gradient_clip_norm: 5.0
+  early_stop_patience: 5
+
+decoding:
+  type: greedy_ctc
+
+metrics:
+  primary:
+    - wer
+    - cer
+  secondary:
+    - substitutions
+    - deletions
+    - insertions
+    - relative_wer_increase
+

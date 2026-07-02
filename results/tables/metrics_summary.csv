@@ -1,0 +1,5 @@
+system_id,system_label,clean_wer,snr20_wer,snr10_wer,snr5_wer,clean_cer,snr20_cer,snr10_cer,snr5_cer,relative_wer_increase_5db
+logmel_train128,Log-mel CTC,1.000000,1.000000,1.000000,1.000000,0.954852,0.946835,0.948523,0.949789,0.000000
+wav2vec2_base960h_ctc,Wav2Vec2 960h pretrained CTC,0.050998,0.082040,0.350333,0.824834,0.017722,0.030380,0.179325,0.527004,15.173850
+wav2vec2_base960h_hidden_head,Wav2Vec2 960h hidden + CTC head,0.055432,0.073171,0.441242,0.869180,0.018143,0.029958,0.202532,0.582278,14.680113
+wav2vec2_base_ssl_head,Wav2Vec2 base + CTC head,1.000000,1.141907,1.186253,1.084257,0.496203,0.649789,0.771730,0.736709,0.084257
